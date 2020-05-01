@@ -5,7 +5,7 @@ public class Student {
     private int id;
     private String name;
     private int password;
-    private ArrayList<String> courses;
+    private ArrayList<Course> courses;
     private HashMap<String, Integer> grades;
     private String email;
 
@@ -16,7 +16,7 @@ public class Student {
     public void setPassword(int pass){ // The password should be integer numbers Only
         this.password = pass;
     }
-    public ArrayList<String> viewCourses(){
+    public ArrayList<Course> viewCourses(){
         return courses;
     }
     public void setEmail(String email){
@@ -25,19 +25,20 @@ public class Student {
     public HashMap<String, Integer> viewGrades (){
         return grades;
     }
-    public void addCourse(String course){
+    public void addCourse(Course course){
         this.courses.add(course);
+
     }
-    public boolean addGrade(String course, int grade){
+    public boolean addGrade(Course course, int grade){
         if(!courses.contains(course)){
             return false;
         }
-        if(! grades.containsKey(course)){
-            grades.put(course, grade);
+        if(! grades.containsKey(course.toString())){
+            grades.put(course.toString(), grade);
         }
         else{
-            int lastGrade = grades.get(course);
-            grades.put(course, lastGrade +grade);
+            int lastGrade = grades.get(course.toString());
+            grades.put(course.toString(), lastGrade +grade);
         }
         return true;
     }
