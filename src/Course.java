@@ -13,9 +13,9 @@ public class Course {
         this.name = name;
         this.code = code;
     }
-    public void setStaff(Doctor doctor, String TA){
+    public void setStaff(Doctor doctor){
         this.doctor = doctor;
-        this.TA = TA;
+        //this.TA = TA;
     }
     public ArrayList<String> courseInfo(){
         ArrayList<String> info = new ArrayList<String>();
@@ -47,6 +47,10 @@ public class Course {
 
     @Override
     public String toString() {
-        return name;
+        return name + " " + code;
+    }
+
+    public String getCode() {
+        return code;
     }
 }
