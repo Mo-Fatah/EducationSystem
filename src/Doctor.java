@@ -19,4 +19,7 @@ public class Doctor {
     public Course getCourse() {
         return course;
     }
+    public void setPassword(int pass){
+        this.password = pass;
+    }
 }
