@@ -6,55 +6,55 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
-        ArrayList<Course> courses = new ArrayList<Course>();
-        Main mn = new Main();
-        mn.fillCourses(courses);
-        ArrayList<Doctor> doctors = new ArrayList<Doctor>();
-        mn.fillDoctors(doctors,courses);
-        ArrayList<Student> students = new ArrayList<Student>();
-        mn.fillStudents(students,courses);
+        ArrayList<Course> courses = CoursesData.getCourses();
+        Main.fillCourses(courses);
+        ArrayList<Doctor> doctors = DoctorsData.getDoctors();
+        Main.fillDoctors(doctors,courses);
+        ArrayList<Student> students = StudentsData.getStudents();
+        Main.fillStudents(students,courses);
+        Scanner input = new Scanner(System.in);
         while (true){
-            System.out.println("Continue as \n 0 Student \n 1 Doctor \n please Enter a number");
-            Scanner input = new Scanner(System.in);
-            int in = input.nextInt();
 
-            while ( in != 0 && in != 1){
-                System.out.println("Please Enter a Valid Number (0 or 1): ");
-                in = input.nextInt();
+            System.out.println("Welcome , User");
+            System.out.print("\nPlease Select an Action \n1 : Student\n2 : Doctor \n3 : Staff\n4 : Quit\n Enter Your Choice : ");
+            int choice = input.nextInt();
+            while (choice < 1 || choice > 4){
+                System.out.println("Invalid Input ");
+                System.out.print("\nPlease Select an Action \n1: Student\n 2:Doctor \n3 : Staff\n4 : Quit\nEnter Your Choice : ");
+                choice = input.nextInt();
             }
-            if ( in == 0){
-                System.out.println("Welcome Dear Student , Please Select an Action to continue \n 0 : Sign-up \n 1 : Sign-in \n 2 : back");
-                int inStudent = input.nextInt();
-                while (inStudent != 0 && inStudent != 1 && inStudent != 2 ){
-                    System.out.println("Please Enter a Valid Number: ");
-                    inStudent = input.nextInt();
-                }
-                if(inStudent == 2)
-                    continue;
-                if(inStudent == 0){ // Sign Up for A new Student
-                    System.out.println("Welcome New Student , Please Enter A username");
-                    String username = input.nextLine();
-                    System.out.println("Great!! ,Please Enter a unique Password of 4 digits (Numbers Only)");
-                    int password = input.nextInt();
-                    int id = students.size();
-                    Student newSt = new Student(id , username);
-                    newSt.setPassword(password);
-                    students.add(newSt);
-                    System.out.println("Thank You, " + username + "."+"You have singed up successfully " + "\n You ID is " + " id" );
-                    continue;
-                }
-                
-
-
+            int returned = 0;
+            switch (choice){
+                case 1 :
+                    StudentActions student = new StudentActions();
+                    returned = student.studentLogin(input ,students);
+                break;
+                case 2 : returned = Main.DoctorLogin(input);
+                break;
+                case 3 : returned = Main.StaffLogin(input);
+                break;
+                case 4 : System.exit(1);
+                break;
             }
-
+            if(returned == 0 ){
+                continue;
+            }
 
         }
 
 
 
+
+
+
+
+
+
+
+
+
     }
-    public void fillCourses(ArrayList<Course> courses){
+    public static ArrayList<Course> fillCourses(ArrayList<Course> courses){
         String[] codes = {"CS1", "CS2" , "CS3" , "CS4" , "CS5", "CS6", "CS7", "CS8" , "CS9" , "CS10"};
         String[] names = {"Programming 1" , "Programming 2" , "Algorithm" , "Data Structure" , "Operating Systems" ,"Networking",
                             "Software Development" , "Software Engineering" , "Project" , "Graduation Project"};
@@ -62,9 +62,10 @@ public class Main {
         for(int i = 0 ; i < codes.length; i++){
             courses.add(new Course(names[i] , codes[i]));
         }
+        return courses;
 
     }
-    public void fillDoctors(ArrayList<Doctor> doctors,ArrayList<Course> courses ){
+    public static void fillDoctors(ArrayList<Doctor> doctors,ArrayList<Course> courses ){
         String[] Doctors = {"Mohamed Samy" , "Aly Ahmed" , "Ibrahim" , "Mahmoud" , "Hassan" , "Khalil" , "Osama" , "Nasr Rashid",
                 "Ateyat" ,"Peter" };
         for(int i = 0 ; i < Doctors.length; i++){
@@ -73,7 +74,7 @@ public class Main {
             doctors.get(i).setPassword(10000-i);
         }
     }
-    public void fillStudents(ArrayList<Student> students,ArrayList<Course> courses){
+    public static void fillStudents(ArrayList<Student> students,ArrayList<Course> courses){
         String[] RandStudents = {"Aly" , "Hossam" , "Ibrahim" , "Esaam" , "Mahmoud" , "Mohamed", "Gaber", "Loay", "Islam" , "Momen"
                                     , "Nour" , "Walaa" , "Salma" , "Somaia" , "Asmaa" , "Hoor" ,"Nany" , "Alexa" , "Karma" , "Khadija"
                                 ,"Wessam" , "Abeer" , "Abdelrahaman"};
@@ -84,10 +85,20 @@ public class Main {
             students.get(i).setPassword(10000-i);
         }
     }
-    public void signInCourse(Student student , Course course){
+    public static void signInCourse(Student student , Course course){
         student.addCourse(course);
         course.addStudent(student);
     }
+
+    // Student Login
+    public static int DoctorLogin(Scanner input){
+        return 0;
+    }
+    public static int StaffLogin(Scanner input){
+        return 0;
+    }
+
+
 
 
 

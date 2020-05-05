@@ -12,10 +12,13 @@ public class Course {
     public Course(String name , String code ){
         this.name = name;
         this.code = code;
+        students = new ArrayList<Student>();
+        Ass = new ArrayList<String>();
+        grades = new HashMap<String, Integer>();
     }
     public void setStaff(Doctor doctor){
         this.doctor = doctor;
-        //this.TA = TA;
+        this.TA = "";
     }
     public ArrayList<String> courseInfo(){
         ArrayList<String> info = new ArrayList<String>();
