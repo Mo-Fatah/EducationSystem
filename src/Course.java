@@ -7,14 +7,14 @@ public class Course {
     private ArrayList<Student> students;
     private Doctor doctor;
     private String TA;
-    private ArrayList<String> Ass;
-    private HashMap<String, Integer> grades;
+    private ArrayList<Assigment> Ass;
+    private HashMap<Student, Integer> grades;
     public Course(String name , String code ){
         this.name = name;
         this.code = code;
         students = new ArrayList<Student>();
-        Ass = new ArrayList<String>();
-        grades = new HashMap<String, Integer>();
+        Ass = new ArrayList<Assigment>();
+        grades = new HashMap<Student, Integer>();
     }
     public void setStaff(Doctor doctor){
         this.doctor = doctor;
@@ -31,22 +31,24 @@ public class Course {
     public void addStudent(Student student){
         students.add(student);
     }
+
     public ArrayList<Student> getStudents(){
         return students;
     }
-    public void addGrade(String name , int grade ){
-        grades.put(name, grade);
+
+    public void addGrade(Student student , int grade ){
+        grades.put(student, grade);
     }
 
-    public HashMap<String, Integer> getGrades() {
+    public HashMap<Student, Integer> getGrades() {
         return grades;
     }
-    public void setAss(String Ass){
-        this.Ass.add(Ass);
-    }
-    public ArrayList<String> getAss(){
-        return Ass;
-    }
+//    public void setAss(String Ass){
+//        this.Ass.add(Ass);
+//    }
+//    public ArrayList<String> getAss(){
+//        return Ass;
+//    }
 
     @Override
     public String toString() {
@@ -55,5 +57,13 @@ public class Course {
 
     public String getCode() {
         return code;
+    }
+    public ArrayList<Assigment> getAss(){
+        return Ass;
+    }
+    public void addAssToStudents(Assigment ass){
+        for(int i = 0 ; i < students.size(); i++){
+            students.get(i).addAss(this, ass);
+        }
     }
 }
