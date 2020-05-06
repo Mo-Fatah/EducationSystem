@@ -9,7 +9,7 @@ public class StudentActions {
         boolean badCombination = true;
         this.stdnt = null;
         do{
-            System.out.println("\nWelcome Dear Student\n0 : Return to the Main Menu\n1 : continue ");
+            System.out.println("\nWelcome Dear Student\n\n0 : Return to the Main Menu\n1 : continue to login");
             if(input.nextInt() == 0)
                 return 0;
 
@@ -17,7 +17,7 @@ public class StudentActions {
             int id = input.nextInt();
             System.out.print("\nPlease Enter your Password : ");
             int password = input.nextInt();
-
+            System.out.println();
 
             for(int i = 0 ; i < students.size(); i++){
                 if(students.get(i).Authentication(id,password)){
@@ -25,6 +25,13 @@ public class StudentActions {
                     badCombination = false;
                     break;
                 }
+            }
+            if(badCombination){
+                System.out.println("Invalid id/Password , please wait and try again");
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                }
+                catch (InterruptedException e){}
             }
 
         }while(badCombination);
@@ -65,9 +72,16 @@ public class StudentActions {
                                 +"\n" +"Doctor : " + courses.get(i).courseInfo().get(2)
                                 +". "+ "TA : " + courses.get(i).courseInfo().get(3));
         }
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        }
+        catch (InterruptedException e){}
+
         return 0;
     }
+
     public static int submitAss(Student student , Scanner input){
+
         return 0;
     }
     public static int DoAnything(Student student , Scanner input){
@@ -82,16 +96,43 @@ public class StudentActions {
         }
         // Complete This Function
         int course = input.nextInt();
+        boolean AlreadyEnroled = false;
+
+        for(Course crs : student.getCourses()){//Check if the selected course is already enrolled in
+            if(currCourses.get(course) == crs){
+                AlreadyEnroled =true;
+            }
+        }
+        if(AlreadyEnroled){// if Already Enrolled , return to the main menu or try again
+            System.out.printf("You are already Enrolled in %s \n",currCourses.get(course).getCode());
+            int choice;
+            do {
+                System.out.println("If You want to enroll in a different course Press : 1\nif You want to return to the main menu press : 0");
+                choice = input.nextInt();
+                if(choice == 1){
+                    enrolInCourse(student,input);
+                    return 0;
+                }
+                else if(choice == 0)
+                    return 0;
+                else
+                    System.out.println("Invalid Input");
+            }while(choice >1 || choice < 0);
+
+        }
+
         student.addCourse(currCourses.get(course));
         currCourses.get(course).addStudent(student);
         System.out.println("Successful Enrolment , You will be returned back to Your Main Menu ");
         try {
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.SECONDS.sleep(2);
         }
         catch (InterruptedException e){}
 
 
         return 0;
     }
+
+
 
 }
