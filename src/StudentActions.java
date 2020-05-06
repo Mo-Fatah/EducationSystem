@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -80,13 +81,8 @@ public class StudentActions {
         return 0;
     }
 
-    public static int submitAss(Student student , Scanner input){
 
-        return 0;
-    }
-    public static int DoAnything(Student student , Scanner input){
-        return 0;
-    }
+
     public static int enrolInCourse(Student student,Scanner input){
         ArrayList<Course> currCourses = CoursesData.getCourses();
         System.out.println("Select the You want to enroll in : ");
@@ -94,8 +90,12 @@ public class StudentActions {
             System.out.println(i + ")" +" "+ currCourses.get(i).courseInfo().get(0) +"\t" +
                     currCourses.get(i).courseInfo().get(1));
         }
+        System.out.printf("%d) Return to the Main Menu.\n",currCourses.size());
+        System.out.print("\nEnter : ");
         // Complete This Function
         int course = input.nextInt();
+        if(course == currCourses.size())
+            return 0;
         boolean AlreadyEnroled = false;
 
         for(Course crs : student.getCourses()){//Check if the selected course is already enrolled in
@@ -132,6 +132,74 @@ public class StudentActions {
 
         return 0;
     }
+
+
+    public static int submitAss(Student student , Scanner input){
+        System.out.println("Choose the Course you want to submit it's Assignment : ");
+        ArrayList<Course> EnrolledCourses = student.getCourses();
+        for(int i = 0 ; i < EnrolledCourses.size(); i++){
+            System.out.println(i + ")" +" "+ EnrolledCourses.get(i).courseInfo().get(0) +"\t" +
+                    EnrolledCourses.get(i).courseInfo().get(1));
+        }
+        System.out.printf("%d) Return to the Main Menu.\n",EnrolledCourses.size());
+        System.out.print("\nEnter : ");
+        // Complete This Function
+        int courseIdx = input.nextInt();
+        if(courseIdx == EnrolledCourses.size()){
+            return 0;
+        }
+        Course course = EnrolledCourses.get(courseIdx);
+        ArrayList<HashMap<Assigment,String>> AssList = student.getAssigns().get(course);
+        System.out.println(course.toString()+ " " +"Assignments : ");
+        ArrayList<Assigment> assIndexing = new ArrayList<Assigment>();
+        // This loop will Print each Assignment with it's state of submission.
+        // And also it will create a list of Assignments indexed so I can choose from them afterward
+        for(int i = 0 ;  i< AssList.size() ; i++){ // iterate over the List Of Assignment
+            for (Assigment ass: AssList.get(i).keySet()) {// get the Key and value of Each Assignment
+                if(AssList.get(i).get(ass).equals("") ){
+                    System.out.println((i+1)+") "+ass.getName() +" :"+"\tnot submitted");
+                }
+                else{
+                    System.out.println((i+1)+") "+ass.getName() + " :" + "\tsubmitted");
+                }
+                assIndexing.add(ass);
+            }
+        }
+        System.out.println("Note : You can Resubmit an Assignment as long as it's not graded yet by the TA ");
+        System.out.print("Choose the Assignment number that you want to Submit or Resubmit(Press 0 if You want to return back) : ");
+        int choice  = input.nextInt();
+        if(choice == 0){
+            submitAss(student,input);
+            return 0;
+        }
+        else{
+            if(choice < 0 || choice > assIndexing.size()){
+                do{
+                    System.out.printf("Please Enter a valid Number (0 - %d) : " ,assIndexing.size());
+                    choice = input.nextInt();
+                    if(choice == 0){
+                        submitAss(student,input);
+                        return 0;
+                    }
+                }while(choice < 0 || choice > assIndexing.size());
+            }
+        }
+        // The Wanted Ass. is choice -1
+        System.out.printf("\nThis is the %s Assignment \n",assIndexing.get(choice-1).getName());
+        System.out.println(assIndexing.get(choice-1).getContent());
+        input.nextLine();
+        System.out.println("Enter Your Response : ");
+        String solution = input.nextLine();
+        for(int i = 0 ; i < AssList.size(); i++){
+            if(AssList.get(i).containsKey(assIndexing.get(choice-1))){
+                AssList.get(i).put(assIndexing.get(choice-1),solution) ;
+            }
+        }
+
+        System.out.println("Submission Done , You will be directed to the Main Menu");
+        return 0;
+    }
+
 
 
 

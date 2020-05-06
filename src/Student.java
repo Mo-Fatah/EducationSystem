@@ -16,6 +16,7 @@ public class Student {
         this.name = name;
         grades = new HashMap<Course, Integer>();
         courses = new ArrayList<Course>();
+        assigns = new HashMap<Course,ArrayList<HashMap<Assigment,String>>>();
     }
     public void setPassword(int pass){ // The password should be integer numbers Only
         this.password = pass;
@@ -91,13 +92,9 @@ public class Student {
         }
         assigns.put(course,ArrForCourse);
     }
+
     // Different from the above method , This method add the new created assignment by the doctor -of a course that I a student enrolled in -
     // to the assigns variable
-
-
-    public HashMap<Course, ArrayList<HashMap<Assigment, String>>> getAssigns() {
-        return assigns;
-    }
     public void addAss(Course course , Assigment ass){
         HashMap<Assigment,String> newAss= new HashMap<Assigment,String>();
         newAss.put(ass,"");
@@ -105,4 +102,8 @@ public class Student {
         assigns.get(course).add(newAss);
 
     }
+    public HashMap<Course, ArrayList<HashMap<Assigment, String>>> getAssigns() {
+        return assigns;
+    }
+
 }
