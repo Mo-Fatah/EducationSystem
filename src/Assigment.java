@@ -5,31 +5,26 @@ public class Assigment {
     private Course course;
     private Student student;
     private String content;
-    private String solution;
-    private double grade;
+    /*
+        The Assignment is Created by a doctor and graded by a TA .
+        Each Course have several Assignments.
+     */
+
     public Assigment(String name , Course course){
         this.name =name;
         this.course = course;
+        course.getAss().add(this);
     }
     // Used by Doctor
     public void addContent(String content){
         this.content = content;
     }
     // Used by Student
-    public void subitAns(String ans){
-        this.solution = ans;
-    }
+
     // Used by TA
-    public void addGrade(double grade){
-        this.grade = grade;
-    }
 
     public Course getCourse() {
         return course;
-    }
-
-    public double getGrade() {
-        return grade;
     }
 
     public String getContent() {
@@ -40,8 +35,6 @@ public class Assigment {
         return name;
     }
 
-    public String getSolution() {
-        return solution;
-    }
-    
+
+
 }
