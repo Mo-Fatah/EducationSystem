@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class StudentActions {
     private Student stdnt;
@@ -79,6 +80,17 @@ public class StudentActions {
             System.out.println(i + ")" +" "+ currCourses.get(i).courseInfo().get(0) +"\t" +
                     currCourses.get(i).courseInfo().get(1));
         }
+        // Complete This Function
+        int course = input.nextInt();
+        student.addCourse(currCourses.get(course));
+        currCourses.get(course).addStudent(student);
+        System.out.println("Successful Enrolment , You will be returned back to Your Main Menu ");
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        }
+        catch (InterruptedException e){}
+
+
         return 0;
     }
 
