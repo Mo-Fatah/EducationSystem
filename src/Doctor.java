@@ -22,4 +22,9 @@ public class Doctor {
     public void setPassword(int pass){
         this.password = pass;
     }
+    public void creatASS(){
+        //
+        // When you create this method, you have to you have to add this new Assignment to all Students enrolled in the course>>
+        //>> by addAssToStudents() method in the Course Class.
+    }
 }
