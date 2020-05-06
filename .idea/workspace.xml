@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c74d95d9-110a-4271-ad17-0577039947db" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/DoctorsData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/StudentActions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/StudentsData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/EducationSystem/Assigment.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EducationSystem/Assigment.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/EducationSystem/Course.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EducationSystem/Course.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/EducationSystem/Doctor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EducationSystem/Doctor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EducationSystem/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EducationSystem/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/EducationSystem/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EducationSystem/Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/EducationSystem/StudentActions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EducationSystem/StudentActions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StudentActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentActions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,22 +82,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="498" y="195" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1588536750954" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1588685654204">
+    <state width="1493" height="135" key="GridCell.Tab.0.bottom" timestamp="1588787319745">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588685654204" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1588685654204">
+    <state width="1493" height="135" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588787319745" />
+    <state width="1493" height="135" key="GridCell.Tab.0.center" timestamp="1588787319745">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588685654204" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1588685654204">
+    <state width="1493" height="135" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588787319745" />
+    <state width="1493" height="135" key="GridCell.Tab.0.left" timestamp="1588787319745">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588685654204" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1588685654204">
+    <state width="1493" height="135" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588787319745" />
+    <state width="1493" height="135" key="GridCell.Tab.0.right" timestamp="1588787319745">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588685654204" />
+    <state width="1493" height="135" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588787319745" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1588536694969">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -118,13 +114,13 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="209" y="33" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1588578546037" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1588680063083">
+    <state x="425" y="187" key="run.anything.popup" timestamp="1588779221603">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1588680063083" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1588676121503">
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1588779221603" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1588751961892">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1588676121503" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1588751961892" />
   </component>
 </project>
