@@ -16,10 +16,12 @@ public class Course {
         Ass = new ArrayList<Assigment>();
         grades = new HashMap<Student, Integer>();
     }
+
     public void setStaff(Doctor doctor){
         this.doctor = doctor;
         this.TA = "";
     }
+
     public ArrayList<String> courseInfo(){
         ArrayList<String> info = new ArrayList<String>();
         info.add(name);
@@ -58,12 +60,18 @@ public class Course {
     public String getCode() {
         return code;
     }
+
     public ArrayList<Assigment> getAss(){
         return Ass;
     }
+
     public void addAssToStudents(Assigment ass){
         for(int i = 0 ; i < students.size(); i++){
             students.get(i).addAss(this, ass);
         }
+    }
+    public void addAss(Assigment ass){
+        this.getAss().add(ass);
+        addAssToStudents(ass);
     }
 }

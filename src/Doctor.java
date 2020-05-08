@@ -2,29 +2,36 @@ import javax.print.Doc;
 import java.util.ArrayList;
 
 public class Doctor {
+    private int id;
     private String name;
-    private Course course;
+    private ArrayList<Course> courses;
     private int password;
 
-    public Doctor(String name, Course course){
+    public Doctor(int id , String name){
+        this.id = id;
         this.name = name;
-        this.course = course;
     }
 
-    @Override
-    public String toString() {
-        return name;
-    }
-
-    public Course getCourse() {
-        return course;
+    public ArrayList<Course> getCourses() {
+        return courses;
     }
     public void setPassword(int pass){
         this.password = pass;
     }
-    public void creatASS(){
-        //
-        // When you create this method, you have to you have to add this new Assignment to all Students enrolled in the course>>
-        //>> by addAssToStudents() method in the Course Class.
+    public boolean Authentication(int id , int password){
+        return this.id == id && this.password == password;
     }
+//    public void creatASS(Course course){
+        //
+
+
+//    }
+    public void addCourse(Course course){
+        this.courses.add(course);
+    }
+
+    public String getName() {
+        return name;
+    }
+
 }

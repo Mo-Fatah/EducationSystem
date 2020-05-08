@@ -13,7 +13,7 @@ public class Assigment {
     public Assigment(String name , Course course){
         this.name =name;
         this.course = course;
-        course.getAss().add(this);
+        course.addAss(this);
     }
     // Used by Doctor
     public void addContent(String content){
