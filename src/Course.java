@@ -26,7 +26,7 @@ public class Course {
         ArrayList<String> info = new ArrayList<String>();
         info.add(name);
         info.add(code);
-        info.add(doctor.toString());
+        info.add(doctor.getName());
         info.add(TA);
         return info;
     }

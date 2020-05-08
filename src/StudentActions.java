@@ -205,12 +205,13 @@ public class StudentActions {
     public static int viewGrades(Student student,Scanner input) {
         HashMap<Course, ArrayList<HashMap<Assigment, Integer>>> grades = student.viewGrades();
         ArrayList<Course> courses = new ArrayList<Course>();
+        int counter = 1;
         for (Course course : grades.keySet()) {
             int gradePerCourse = -1;
             boolean flag = false;
             courses.add(course);
-            int counter = 1;
             System.out.printf("\n%d) %s", counter, course.getCode()+ " : ");
+            counter++;
             ArrayList<HashMap<Assigment, Integer>> arr = grades.get(course);
             if(arr == null){
                 System.out.print("Nothing Graded Yet");
@@ -234,7 +235,6 @@ public class StudentActions {
             }
             else
                 System.out.print("Nothing Graded Yet");
-            counter++;
         }
 
         System.out.println("\nIf you want to view the detailed grades for each Assignment of a course , please Enter the number of the course."
@@ -255,10 +255,10 @@ public class StudentActions {
             for (int i = 0; i < arr.size(); i++) {
                 for (Assigment ass : arr.get(i).keySet()) {
                     if (arr.get(i).get(ass) == -1) {
-                        System.out.printf("\n%s : Not Graded Yet", ass.getName());
+                        System.out.printf("\n%s : Not Graded Yet\n", ass.getName());
                     }
                     else {
-                        System.out.printf("\n%s : %d", ass.getName(),arr.get(i).get(ass));
+                        System.out.printf("\n%s : %d\n", ass.getName(),arr.get(i).get(ass));
                     }
 
                 }

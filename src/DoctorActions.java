@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -44,12 +45,12 @@ public class DoctorActions {
         return returned;
     }
     public static int DoctorMenu(Doctor doctor , Scanner input){
-        System.out.printf("\nWelcome Dr.%s" , doctor.getName());
+        System.out.printf("\nWelcome Dr.%s\n" , doctor.getName());
         System.out.println("What do You want to do ?" +
-                "\n1 : Create Assignment \n2 : View Students Performance \n3 : Create Course \n0 : LogOut");
+                "\n1 : Create Assignment \n2 : View Students Performance \n3 : Create Course \n4 : Add TA\n0 : LogOut");
         System.out.print("Enter : ");
         int choice = input.nextInt();
-        if(choice > 3 || choice < 0){
+        if(choice > 4 || choice < 0){
             do{
                 System.out.print("Invalid input. Enter (0-3) : ");
                 choice = input.nextInt();
@@ -62,8 +63,9 @@ public class DoctorActions {
             break;
             case 3 : DoctorActions.createCourse(doctor,input);
             break;
+//            case 4 : DoctorActions.addTA(doctor, input);
+//            break;
             case 0 : return 0;
-            break;
         }
         DoctorMenu(doctor,input);
         return 0 ;
@@ -74,18 +76,18 @@ public class DoctorActions {
         for(int i = 0 ; i < doctor.getCourses().size(); i++){
             System.out.printf("\n"+(i+1) + ") %s" ,doctor.getCourses().get(i).getCode());
         }
-        System.out.print("Enter : ");
+        System.out.print("\n\nEnter : ");
         int choice = input.nextInt();
-        if(choice < 0 || choice > doctor.getCourses().size()-1){
+        if(choice < 0 || choice > doctor.getCourses().size()){
             do {
                 System.out.print("\nInvalid input, Enter again : ");
                 choice = input.nextInt();
-            }while(choice < 0 || choice > doctor.getCourses().size()-1);
+            }while(choice < 0 || choice > doctor.getCourses().size());
         }
         Course course = doctor.getCourses().get(choice-1);
         System.out.println(course.toString());
         System.out.print("\nEnter the title : ");
-        input.next();
+        input.nextLine();
         String name = input.nextLine();
         Assigment ass = new Assigment(name ,course);
         System.out.print("\nEnter The Content( Enter = Submit) : ");
@@ -101,10 +103,81 @@ public class DoctorActions {
     }
 
     public static int viewPerf(Doctor doctor , Scanner input){
+        System.out.println("Students Performance");
+        System.out.println("Which course you want to view ? : ");
+        for(int i = 0 ; i < doctor.getCourses().size(); i++){
+            System.out.printf("\n"+(i+1) + ") %s" ,doctor.getCourses().get(i).getCode());
+        }
+        System.out.print("\nEnter : ");
+        int choice = input.nextInt();
+        if(choice < 0 || choice > doctor.getCourses().size()){
+            do {
+                System.out.print("\nInvalid input, Enter again : ");
+                choice = input.nextInt();
+            }while(choice < 0 || choice > doctor.getCourses().size());
+        }
+        Course course = doctor.getCourses().get(choice-1);
+        ArrayList<Student> students = course.getStudents();
+        for(int i = 0 ;i< students.size(); i++){
+            System.out.println(students.get(i).getId() +" "+ students.get(i).getName() + " : " +getGrade(students.get(i),course));
+
+        }
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        }
+        catch (InterruptedException e){}
         return 0;
     }
 
     public static int createCourse(Doctor doctor , Scanner input){
+        System.out.print("Enter the course name : ");
+        input.nextLine();
+        String name = input.nextLine();
+//        input.next();
+        System.out.print("Enter the course code : ");
+        String code = input.nextLine();
+        Course course = new Course(name,code);
+        doctor.addCourse(course);
+        CoursesData.addCourse(course);
+        System.out.printf("\nCourse created successfully. Students now can enroll in %s\n", code);
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        }
+        catch (InterruptedException e){}
+        System.out.println("\n0 : to return \n1 : Create another course");
+        System.out.print("Enter : ");
+        int choice = input.nextInt();
+        if(choice == 0)
+            return 0;
+        createCourse(doctor,input);
         return 0;
+    }
+
+
+    // Helper
+    private static String getGrade(Student student , Course course){
+        ArrayList<HashMap<Assigment,Integer>> grades = student.viewGrades().get(course);
+        int gradePerCourse = -1;
+        boolean flag =false;
+        if(grades == null){
+            return "No Assignment created yet";
+        }
+        for (int i = 0; i < grades.size(); i++) {
+            for (Assigment ass : grades.get(i).keySet()) {
+                if (grades.get(i).get(ass) == -1) {
+                    continue;
+                }
+                else{
+                    flag = true;
+                    gradePerCourse += grades.get(i).get(ass);
+                }
+            }
+        }
+        if(flag){
+            gradePerCourse++;
+            return Integer.toString(gradePerCourse);
+        }
+        else
+            return "No Grade Yet";
     }
 }

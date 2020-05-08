@@ -10,6 +10,7 @@ public class Doctor {
     public Doctor(int id , String name){
         this.id = id;
         this.name = name;
+        courses = new ArrayList<Course>();
     }
 
     public ArrayList<Course> getCourses() {
@@ -28,10 +29,15 @@ public class Doctor {
 //    }
     public void addCourse(Course course){
         this.courses.add(course);
+        course.setStaff(this);
     }
 
     public String getName() {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return  name;
+    }
 }
