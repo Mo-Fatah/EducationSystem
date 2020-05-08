@@ -6,7 +6,7 @@ public class Student {
     private String name;
     private int password;
     private ArrayList<Course> courses;
-    private HashMap<Course, Integer> grades;
+    private HashMap<Course, ArrayList<HashMap<Assigment,Integer>>> grades;
     private String email;
     private HashMap<Course,ArrayList<HashMap<Assigment,String>>> assigns;
 //    private HashMap<> assStatus;
@@ -14,7 +14,7 @@ public class Student {
     public Student(int id , String name){
         this.id = id;
         this.name = name;
-        grades = new HashMap<Course, Integer>();
+        grades = new HashMap<Course, ArrayList<HashMap<Assigment,Integer>>>();
         courses = new ArrayList<Course>();
         assigns = new HashMap<Course,ArrayList<HashMap<Assigment,String>>>();
     }
@@ -34,13 +34,13 @@ public class Student {
         this.email = email;
     }
 
-    public HashMap<Course, Integer> viewGrades (){
-        return grades;
-    }
+
 
     public void addCourse(Course course){
         this.courses.add(course);
+        this.grades.put(course,null);
         this.addAllAssigns(course);
+
     }
 
 //    public boolean addGrade(Course course, int grade){
@@ -76,10 +76,7 @@ public class Student {
         return courses;
     }
 
-    public void enroll(Course course){
-        this.addCourse(course);
-        course.addStudent(this);
-    }
+
     // This Method Adds All the Assignment that was created in the new Enrolled course
     // This Method should be called at the of addCourse Method
     public void addAllAssigns(Course course){
@@ -89,8 +86,11 @@ public class Student {
         for(int j = 0 ; j < ass.size(); j ++){
             hashForthisAss.put(ass.get(j), "");
             ArrForCourse.add(hashForthisAss);
+            this.addGrade(course,ass.get(j) ,-1 );
+
         }
         assigns.put(course,ArrForCourse);
+
     }
 
     // Different from the above method , This method add the new created assignment by the doctor -of a course that I a student enrolled in -
@@ -100,10 +100,31 @@ public class Student {
         newAss.put(ass,"");
 //        assigns.get(course);
         assigns.get(course).add(newAss);
+        this.addGrade(course,ass, -1);
 
     }
     public HashMap<Course, ArrayList<HashMap<Assigment, String>>> getAssigns() {
         return assigns;
+    }
+
+   // This Method should be Called 3 times :
+    // 1 - Mainly by the TA to put A value in the grade
+    // 2 - in the Method addAllAssigns so with each course added , it's assignments paired with a null grade are added
+    // 3 - in the Method addAss so with each new Ass Added , it will be added automatically to the grades with a null value
+    public void addGrade(Course course , Assigment ass, Integer grade){
+        HashMap<Assigment,Integer> thisGrade = new HashMap<Assigment,Integer>();
+        thisGrade.put(ass,grade);
+        if(grades.get(course) == null){
+            ArrayList<HashMap<Assigment, Integer>> thisArr = new ArrayList<HashMap<Assigment, Integer>>();
+            thisArr.add(thisGrade);
+            this.grades.put(course, thisArr);
+        }
+        else
+            this.grades.get(course).add(thisGrade);
+    }
+
+    public HashMap<Course, ArrayList<HashMap<Assigment,Integer>>> viewGrades (){
+        return grades;
     }
 
 }

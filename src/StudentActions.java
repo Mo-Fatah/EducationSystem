@@ -46,7 +46,7 @@ public class StudentActions {
 
     public static int StudentMenu(Student student , Scanner input){
         System.out.printf("\n\nWelcome %s \n\n",student.getName());
-        System.out.println("What do you want to do ?\n1 : View Courses\n2 : Submit Assignment\n3 : Enroll in Course\n0 : LogOut ");
+        System.out.println("What do you want to do ?\n1 : View Courses\n2 : Submit Assignment\n3 : Enroll in Course\n4 : View My Grades\n0 : LogOut ");
         int choice = input.nextInt();
         int returned = 0;
         switch (choice){
@@ -56,8 +56,9 @@ public class StudentActions {
                 break;
             case 3 : returned = StudentActions.enrolInCourse(student,input);
                 break;
+            case 4 : returned = StudentActions.viewGrades(student,input);
+            break;
             case 0 : return 0;
-
         }
         if(returned == 0){
             StudentMenu(student ,input);
@@ -65,6 +66,8 @@ public class StudentActions {
         return returned;
 
     }
+
+    
     public static int viewCourses(Student student , Scanner input){
         ArrayList<Course> courses = student.getCourses();
         System.out.println("You Enrolled in the following courses:");
@@ -199,6 +202,79 @@ public class StudentActions {
         System.out.println("Submission Done , You will be directed to the Main Menu");
         return 0;
     }
+    public static int viewGrades(Student student,Scanner input) {
+        HashMap<Course, ArrayList<HashMap<Assigment, Integer>>> grades = student.viewGrades();
+        ArrayList<Course> courses = new ArrayList<Course>();
+        for (Course course : grades.keySet()) {
+            int gradePerCourse = -1;
+            boolean flag = false;
+            courses.add(course);
+            int counter = 1;
+            System.out.printf("\n%d) %s", counter, course.getCode()+ " : ");
+            ArrayList<HashMap<Assigment, Integer>> arr = grades.get(course);
+            if(arr == null){
+                System.out.print("Nothing Graded Yet");
+                continue;
+            }
+
+            for (int i = 0; i < arr.size(); i++) {
+                for (Assigment ass : arr.get(i).keySet()) {
+                    if (arr.get(i).get(ass) == -1) {
+                        continue;
+                    }
+                    else{
+                        flag = true;
+                        gradePerCourse += arr.get(i).get(ass);
+                    }
+                }
+            }
+            if(flag){
+                gradePerCourse++;
+                System.out.print(gradePerCourse);
+            }
+            else
+                System.out.print("Nothing Graded Yet");
+            counter++;
+        }
+
+        System.out.println("\nIf you want to view the detailed grades for each Assignment of a course , please Enter the number of the course."
+                            +"Enter 0 to return");
+        System.out.print("Enter : ");
+        int choice = input.nextInt();
+        if(choice == 0)
+            return 0;
+        Course TheCourse = courses.get(choice-1);
+        for(Course course : grades.keySet()){
+            if(course != TheCourse)
+                continue;
+            ArrayList<HashMap<Assigment, Integer>> arr = grades.get(course);
+            if(arr == null){
+                System.out.printf("\n%s No Assignments\n",TheCourse.getCode());
+                continue;
+            }
+            for (int i = 0; i < arr.size(); i++) {
+                for (Assigment ass : arr.get(i).keySet()) {
+                    if (arr.get(i).get(ass) == -1) {
+                        System.out.printf("\n%s : Not Graded Yet", ass.getName());
+                    }
+                    else {
+                        System.out.printf("\n%s : %d", ass.getName(),arr.get(i).get(ass));
+                    }
+
+                }
+            }
+
+        }
+        System.out.println("If You want to view Another Course Press 1\nTo return press 0");
+        System.out.print("Enter : ");
+        choice = input.nextInt();
+        if(choice == 0)
+            return 0;
+        viewGrades(student,input);
+        return 0;
+    }
+
+
 
 
 
