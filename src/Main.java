@@ -24,27 +24,22 @@ public class Main {
                 System.out.print("\nPlease Select an Action \n1: Student\n 2:Doctor \n3 : Staff\n4 : Quit\nEnter Your Choice : ");
                 choice = input.nextInt();
             }
-            int returned = 0;
             switch (choice){
                 case 1 :
                     StudentActions student = new StudentActions();
-                    returned = student.studentLogin(input ,students);
+                    student.studentLogin(input ,students);
                 break;
                 case 2 :
                     DoctorActions doctor = new DoctorActions();
-                    returned = doctor.DoctorLogin(input,doctors);
+                    doctor.DoctorLogin(input,doctors);
                 break;
                 case 3 :
                     TAActions ta = new TAActions();
-                    returned = ta.TALogin(input,tas);
+                    ta.TALogin(input,tas);
                 break;
                 case 4 : System.exit(1);
                 break;
             }
-            if(returned == 0 ){
-                continue;
-            }
-
         }
     }
 
