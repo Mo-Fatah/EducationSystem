@@ -8,4 +8,13 @@ public class TAsData {
     public static ArrayList<TA> getTAs(){
         return tas;
     }
+    public static boolean verifyPassId(int pass , int id){
+        for(TA ta : tas){
+            if(ta.getId() == id || ta.getPassword() == pass){
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

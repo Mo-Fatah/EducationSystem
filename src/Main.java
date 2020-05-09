@@ -24,6 +24,32 @@ public class Main {
                 System.out.print("\nPlease Select an Action \n1: Student\n 2:Doctor \n3 : Staff\n4 : Quit\nEnter Your Choice : ");
                 choice = input.nextInt();
             }
+            if(choice == 4)
+                System.exit(1);
+
+            System.out.print("\n0 : Sign-in\n1 : Sing-up");
+            System.out.print("\nEnter : ");
+            int choice2 = input.nextInt();
+            if(choice2 == 1){
+                switch (choice){
+                    case 1 :
+                        StudentActions student = new StudentActions();
+                        student.signUp(input);
+                        break;
+                    case 2 :
+                        DoctorActions doctor = new DoctorActions();
+                        doctor.signUp(input);
+                        break;
+                    case 3 :
+                        TAActions ta = new TAActions();
+                        ta.signUp(input);
+                        break;
+                    case 4 : System.exit(1);
+                        break;
+                }
+                continue;
+            }
+
             switch (choice){
                 case 1 :
                     StudentActions student = new StudentActions();

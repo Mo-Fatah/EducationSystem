@@ -8,5 +8,14 @@ public class StudentsData {
     public static ArrayList<Student> getStudents(){
         return students;
     }
+    public static boolean verifyPassId(int pass , int id){
+        for(Student student : students){
+            if(student.getId() == id || student.getPassword() == pass){
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 }

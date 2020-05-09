@@ -40,4 +40,12 @@ public class Doctor {
     public String toString() {
         return  name;
     }
+
+    public int getPassword() {
+        return password;
+    }
+
+    public int getId() {
+        return id;
+    }
 }

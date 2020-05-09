@@ -30,4 +30,12 @@ public class TA {
     public ArrayList<Course> getCourses() {
         return courses;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getPassword() {
+        return password;
+    }
 }

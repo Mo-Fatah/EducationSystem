@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -287,6 +288,8 @@ public class StudentActions {
         if(choice == 0)
             return 0;
         Course course = student.getCourses().get(choice -1);
+        if(course.getAnnouncement().size() == 0 )
+            System.out.println("No Announcement Yet");
         for(int i = 0 ; i < course.getAnnouncement().size(); i++){
             System.out.printf("\nAnnouncement %d : %s", (i+1), course.getAnnouncement().get(i));
         }
@@ -298,6 +301,29 @@ public class StudentActions {
         if (choice == 1)
             viewAnn(student,input);
         return 0;
+    }
+    public static void signUp(Scanner input){
+        System.out.print("\n\nPlease Enter Your first name : ");
+        input.nextLine();
+        String name = input.nextLine();
+        Random r = new Random();
+        int pass;
+        int id;
+        do {
+            int low = 100;
+            int high = 1000;
+            id = r.nextInt(high-low) + low;
+            low = 10000;
+            high = 100000;
+            pass = r.nextInt(high-low) + low;
+        }while(! StudentsData.verifyPassId(pass,id));
+        Student student = new Student(id,name);
+        student.setPassword(pass);
+        StudentsData.getStudents().add(student);
+        System.out.printf("\nSuccessful Sign-up as A Student\nYour ID is : %d\nyour Password is : %d", id,pass);
+        System.out.println("\nPress 0 to return ");
+        System.out.print("\nEnter : ");
+        input.nextInt();
     }
 
 

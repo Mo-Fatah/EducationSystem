@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -202,5 +203,28 @@ public class DoctorActions {
         course.setTA(ta);
         ta.addCourse(course);
         return 0;
+    }
+    public static void signUp(Scanner input){
+        System.out.print("\n\nPlease Enter Your first name : ");
+        input.nextLine();
+        String name = input.nextLine();
+        Random r = new Random();
+        int pass;
+        int id;
+        do {
+            int low = 100;
+            int high = 1000;
+            id = r.nextInt(high-low) + low;
+            low = 10000;
+            high = 100000;
+            pass = r.nextInt(high-low) + low;
+        }while(! DoctorsData.verifyPassId(pass,id));
+        Doctor doctor = new Doctor(id,name);
+        doctor.setPassword(pass);
+        DoctorsData.getDoctors().add(doctor);
+        System.out.printf("\nSuccessful Sign-up as A Doctor\nYour ID is : %d\nyour Password is : %d", id,pass);
+        System.out.println("\nPress 0 to return ");
+        System.out.print("\nEnter : ");
+        input.nextInt();
     }
 }

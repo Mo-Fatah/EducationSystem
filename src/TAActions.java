@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -116,6 +117,8 @@ public class TAActions {
     }
     public static int makeAnn(TA ta , Scanner input){
         System.out.println("Which Course?");
+        if(ta.getCourses().size() == 0)
+            System.out.println("You are not added to any Course Yet");
         for(int i =0 ;i < ta.getCourses().size(); i++){
             System.out.println((i+1) + ")" + " "+ta.getCourses().get(i).getCode());
         }
@@ -135,5 +138,28 @@ public class TAActions {
         }
         catch (InterruptedException e){}
         return 0;
+    }
+    public static void signUp(Scanner input){
+        System.out.print("\n\nPlease Enter Your first name : ");
+        input.nextLine();
+        String name = input.nextLine();
+        Random r = new Random();
+        int pass;
+        int id;
+        do {
+            int low = 100;
+            int high = 1000;
+            id = r.nextInt(high-low) + low;
+            low = 10000;
+            high = 100000;
+            pass = r.nextInt(high-low) + low;
+        }while(! TAsData.verifyPassId(pass,id));
+        TA ta = new TA(id , name);
+        ta.setPassword(pass);
+        TAsData.getTAs().add(ta);
+        System.out.printf("\nSuccessful Sign-up as A Teaching Assistant\nYour ID is : %d\nyour Password is : %d", id,pass);
+        System.out.println("\nPress 0 to return ");
+        System.out.print("\nEnter : ");
+        input.nextInt();
     }
 }
