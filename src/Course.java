@@ -9,12 +9,14 @@ public class Course {
     private TA ta;
     private ArrayList<Assigment> Ass;
     private HashMap<Student, Integer> grades;
+    private ArrayList<String> announcement; // submitted by staff
     public Course(String name , String code ){
         this.name = name;
         this.code = code;
         students = new ArrayList<Student>();
         Ass = new ArrayList<Assigment>();
         grades = new HashMap<Student, Integer>();
+        announcement = new ArrayList<String >();
     }
 
     public void setStaff(Doctor doctor){
@@ -75,5 +77,13 @@ public class Course {
 
     public void setTA(TA ta) {
         this.ta = ta;
+    }
+
+    public void submitAnn(String ann){
+        announcement.add(ann);
+    }
+
+    public ArrayList<String> getAnnouncement() {
+        return announcement;
     }
 }

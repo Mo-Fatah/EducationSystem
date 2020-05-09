@@ -115,6 +115,25 @@ public class TAActions {
         return 0;
     }
     public static int makeAnn(TA ta , Scanner input){
+        System.out.println("Which Course?");
+        for(int i =0 ;i < ta.getCourses().size(); i++){
+            System.out.println((i+1) + ")" + " "+ta.getCourses().get(i).getCode());
+        }
+        System.out.println("0 : back");
+        System.out.print("\nEnter : ");
+        int choice = input.nextInt();
+        if(choice == 0)
+            return 0;
+        Course course = ta.getCourses().get(choice -1);
+        System.out.print("Enter Announcement : ");
+        input.nextLine();
+        String ann = input.nextLine();
+        course.submitAnn(ann);
+        System.out.print("Announcement Added to the Course Successfully, You will be returned to the Main Menu");
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        }
+        catch (InterruptedException e){}
         return 0;
     }
 }

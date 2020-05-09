@@ -46,7 +46,8 @@ public class StudentActions {
 
     public static int StudentMenu(Student student , Scanner input){
         System.out.printf("\n\nWelcome %s \n\n",student.getName());
-        System.out.println("What do you want to do ?\n1 : View Courses\n2 : Submit Assignment\n3 : Enroll in Course\n4 : View My Grades\n0 : LogOut ");
+        System.out.println("What do you want to do ?\n1 : View Courses\n2 : Submit Assignment\n3 : Enroll in Course\n4 : View My Grades" +
+                "\n5 : Staff Announcement\n0 : LogOut ");
         int choice = input.nextInt();
         int returned = 0;
         switch (choice){
@@ -57,6 +58,8 @@ public class StudentActions {
             case 3 : returned = StudentActions.enrolInCourse(student,input);
                 break;
             case 4 : returned = StudentActions.viewGrades(student,input);
+            break;
+            case 5 : returned = StudentActions.viewAnn(student, input);
             break;
             case 0 : return 0;
         }
@@ -271,6 +274,29 @@ public class StudentActions {
         if(choice == 0)
             return 0;
         viewGrades(student,input);
+        return 0;
+    }
+    public static int viewAnn(Student student,Scanner input){
+        System.out.println("Which Course ? ");
+        for(int i =0 ; i< student.getCourses().size(); i++){
+            System.out.println((i+1) + ")" + " "+student.getCourses().get(i).getCode());
+        }
+        System.out.println("0 : back");
+        System.out.print("\nEnter : ");
+        int choice = input.nextInt();
+        if(choice == 0)
+            return 0;
+        Course course = student.getCourses().get(choice -1);
+        for(int i = 0 ; i < course.getAnnouncement().size(); i++){
+            System.out.printf("\nAnnouncement %d : %s", (i+1), course.getAnnouncement().get(i));
+        }
+        System.out.print("\nPress 1 to view another course , 0 to return to the Main Menu");
+        System.out.print("\nEnter : ");
+        choice = input.nextInt();
+        if(choice == 0)
+            return 0;
+        if (choice == 1)
+            viewAnn(student,input);
         return 0;
     }
 
