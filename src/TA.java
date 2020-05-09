@@ -5,19 +5,29 @@ public class TA {
     private String name;
     private int id;
     private int password;
-    private ArrayList<Course> course;
+    private ArrayList<Course> courses;
 
-    public TA(String name){
+    public TA(int id ,String name){
         this.name = name;
-        course = new ArrayList<Course>();
+        this.id = id;
+        courses = new ArrayList<Course>();
     }
     public void setPassword(int password) {
         this.password = password;
     }
 
     public void addCourse(Course course){
-        this.course.add(course);
+        this.courses.add(course);
+    }
+    public boolean Authentication(int id , int password){
+        return this.id == id && this.password == password;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
 }

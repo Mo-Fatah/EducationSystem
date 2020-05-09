@@ -6,7 +6,7 @@ public class Course {
     private String code;
     private ArrayList<Student> students;
     private Doctor doctor;
-    private String TA;
+    private TA ta;
     private ArrayList<Assigment> Ass;
     private HashMap<Student, Integer> grades;
     public Course(String name , String code ){
@@ -19,7 +19,6 @@ public class Course {
 
     public void setStaff(Doctor doctor){
         this.doctor = doctor;
-        this.TA = "";
     }
 
     public ArrayList<String> courseInfo(){
@@ -27,7 +26,6 @@ public class Course {
         info.add(name);
         info.add(code);
         info.add(doctor.getName());
-        info.add(TA);
         return info;
     }
     public void addStudent(Student student){
@@ -73,5 +71,9 @@ public class Course {
     public void addAss(Assigment ass){
         this.getAss().add(ass);
         addAssToStudents(ass);
+    }
+
+    public void setTA(TA ta) {
+        this.ta = ta;
     }
 }

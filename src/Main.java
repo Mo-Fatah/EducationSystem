@@ -12,6 +12,8 @@ public class Main {
         Main.fillDoctors(doctors,courses);
         ArrayList<Student> students = StudentsData.getStudents();
         Main.fillStudents(students,courses);
+        ArrayList<TA> tas = TAsData.getTAs();
+        Main.fillTAs(tas);
         Scanner input = new Scanner(System.in);
         while (true){
             System.out.println("Welcome , User");
@@ -32,7 +34,9 @@ public class Main {
                     DoctorActions doctor = new DoctorActions();
                     returned = doctor.DoctorLogin(input,doctors);
                 break;
-                case 3 : returned = Main.StaffLogin(input);
+                case 3 :
+                    TAActions ta = new TAActions();
+                    returned = ta.TALogin(input,tas);
                 break;
                 case 4 : System.exit(1);
                 break;
@@ -75,21 +79,31 @@ public class Main {
         }
     }
     public static void fillStudents(ArrayList<Student> students,ArrayList<Course> courses){
-        String[] RandStudents = {"Aly" , "Hossam" , "Ibrahim" , "Esaam" , "Mahmoud" , "Mohamed", "Gaber", "Loay", "Islam" , "Momen"
-                                    , "Nour" , "Walaa" , "Salma" , "Somaia" , "Asmaa" , "Hoor" ,"Nany" , "Alexa" , "Karma" , "Khadija"
-                                ,"Wessam" , "Abeer" , "Abdelrahaman"};
+        String[] RandStudents = {"Aly" , "Hossam" , "Ibrahim" , "Esaam" , "Mahmoud" , "Mohamed", "Gaber", "Loay", "Islam" , "Momen"};
         for(int i = 0 ; i < RandStudents.length; i++ ){
             students.add(new Student(i,RandStudents[i]));
-            Random rand = new Random();
-            signInCourse(students.get(i), courses.get(rand.nextInt(courses.size())));
+            signInCourse(students.get(i), courses.get(i));
             students.get(i).setPassword(10000-i);
         }
     }
+    public static void fillTAs(ArrayList<TA> tas){
+        String[] RandTas = {"Aly" , "Hossam" , "Ibrahim" , "Esaam" , "Mahmoud" , "Mohamed", "Gaber", "Loay", "Islam" , "Momen"
+                , "Nour" , "Walaa"};
+        for(int i = 0 ; i < RandTas.length ; i++){
+            tas.add(new TA(i,RandTas[i]));
+            tas.get(i).setPassword(10000-i);
+
+        }
+    }
+
+
     // This Method Only For Dummy Data Generation
     private static void signInCourse(Student student , Course course){
         student.addCourse(course);
         course.addStudent(student);
     }
+
+
 
     // Student Login
 

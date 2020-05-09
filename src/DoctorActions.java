@@ -63,8 +63,8 @@ public class DoctorActions {
             break;
             case 3 : DoctorActions.createCourse(doctor,input);
             break;
-//            case 4 : DoctorActions.addTA(doctor, input);
-//            break;
+            case 4 : DoctorActions.addTA(doctor, input);
+            break;
             case 0 : return 0;
         }
         DoctorMenu(doctor,input);
@@ -179,5 +179,28 @@ public class DoctorActions {
         }
         else
             return "No Grade Yet";
+    }
+    public static int addTA(Doctor doctor, Scanner input){
+        System.out.println("Who do you want to add ? :");
+        ArrayList<TA> tas = TAsData.getTAs();
+        for(int i = 0 ; i < tas.size(); i++){
+            System.out.printf("\n%d) %s\n" , (i+1), tas.get(i).getName());
+        }
+        System.out.println("\n0 : back");
+        System.out.print("\nEnter : ");
+        int choice = input.nextInt();
+        if(choice == 0)
+            return 0;
+        TA ta = tas.get(choice -1 );
+        System.out.println("Which Course :");
+        ArrayList<Course> courses = doctor.getCourses();
+        for(int i = 0 ; i < courses.size(); i++){
+            System.out.printf("\n%d) %s\n" , (i+1), courses.get(i).getCode());
+        }
+        choice = input.nextInt();
+        Course course  = courses.get(choice -1 );
+        course.setTA(ta);
+        ta.addCourse(course);
+        return 0;
     }
 }

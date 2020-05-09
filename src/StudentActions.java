@@ -74,7 +74,7 @@ public class StudentActions {
         for(int i = 0 ; i < courses.size() ;i++){
             System.out.println(courses.get(i).courseInfo().get(0)+" " +courses.get(i).courseInfo().get(1)
                                 +"\n" +"Doctor : " + courses.get(i).courseInfo().get(2)
-                                +". "+ "TA : " + courses.get(i).courseInfo().get(3));
+                                );
         }
         try {
             TimeUnit.SECONDS.sleep(1);
